@@ -9,71 +9,47 @@ const SET_USER_FOLLOWING = '@@github/SET_USER_FOLLOWING';
 const FETCH_USER_REPOS = '@@github/FETCH_USER_REPOS';
 const SET_USER_REPOS = '@@github/SET_USER_REPOS';
 
-function doSetUserDetails(userDetails) {
+function doFetchUserDetails(username: string) {
+    return (dispatch: Function) => {
+        fetch(`https://api.github.com/users/${username}`)
+        .then(response => response.json())
+        .then((data: User) => {
+            dispatch(doSetUserDetails(data));
+        });
+    };
+}
+
+function doSetUserDetails(userDetails: User) {
   return {
     type: SET_USER_DETAILS,
     userDetails,
   };
 }
 
-function doFetchUserDetails(username) {
-  return (dispatch: Function) => {
-    fetch(`https://api.github.com/users/${username}`)
-      .then(response => response.json())
-      .then((data: User) => {
-        dispatch(doSetUserDetails(data));
-      });
-  };
-}
-
-function doSetFollowers(followers) {
+function doSetFollowers(followers: Array<Follow>) {
   return {
     type: SET_USER_FOLLOWERS,
     followers,
   };
 }
 
-function doFetchFollowers(user) {
-  return (dispatch: Function) => {
-    fetch(user.followers_url)
-      .then(response => response.json());
-      // .then(data => dispatch(doSetFollowers(data)));
-  };
-}
-
-function doSetFollowing(following) {
+function doSetFollowing(following: Array<Follow>) {
   return {
     type: SET_USER_FOLLOWING,
     following,
   };
 }
 
-function doFetchFollowing(user) {
-  return (dispatch: Function) => {
-    fetch(user.following_url)
-      .then(response => response.json());
-      // .then(data => dispatch(doSetFollowing(data)));
-  };
-}
-
-function doSetRepos(repos) {
+function doSetRepos(repos: Array<Repo>) {
   return {
     type: SET_USER_REPOS,
     repos,
   };
 }
 
-function doFetchRepos(user) {
-  return (dispatch: Function) => {
-    fetch(user.repos_url)
-      .then(response => response.json());
-      // .then(data => dispatch(doSetRepos(data)));
-  };
-}
-
 const initialState = {
   userDetails: {},
-  username: null,
+  username: '',
   followers: {},
   following: {},
   repos: {},
@@ -84,7 +60,7 @@ function applyResetUser(state) {
 }
 
 function applySetUser(state, action) {
-  const {userDetails, username} = action;
+  const {userDetails} = action;
   return {...state, userDetails};
 }
 
@@ -122,9 +98,9 @@ function reducer(state: Object = initialState, action: Object) {
 
 const actionCreators = {
   doFetchUserDetails,
-  doFetchFollowers,
-  doFetchFollowing,
-  doFetchRepos,
+  doSetFollowers,
+  doSetFollowing,
+  doSetRepos,
 };
 
 const actionTypes = {

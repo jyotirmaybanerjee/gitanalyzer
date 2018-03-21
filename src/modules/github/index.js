@@ -1,9 +1,9 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {actionCreators as gitActionCreators} from './ducks';
+import {actionCreators as gitActionCreators} from './actions';
 import GitHub from './components';
-// import './styles/index.sass';
+import './styles/index.sass';
 
 function mapStateToProps(state) {
   const {userDetails, username, followers, following, repos} = state.git;
@@ -18,7 +18,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onFetchUserDetails: bindActionCreators(gitActionCreators.doFetchUserDetails, dispatch),
+    doFetchUserDetails: bindActionCreators(gitActionCreators.doFetchUserDetails, dispatch),
   };
 }
 

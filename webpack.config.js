@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 function isEnvSet(name, def) {
     return name in process.env ? ['1', 't', 'true'].indexOf(
@@ -55,6 +57,9 @@ const config = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
+    }),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
     })
     // new ExtractTextPlugin({
     //     filename: "[name].[contenthash].css",
