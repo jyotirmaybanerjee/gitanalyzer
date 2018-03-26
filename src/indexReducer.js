@@ -4,5 +4,5 @@ import git from './modules/github/actions';
 
 export default combineReducers({
   git,
-  routing: routerReducer,
+  router: routerReducer,
 });

@@ -8,6 +8,7 @@ const FETCH_USER_FOLLOWING = '@@github/FETCH_USER_FOLLOWING';
 const SET_USER_FOLLOWING = '@@github/SET_USER_FOLLOWING';
 const FETCH_USER_REPOS = '@@github/FETCH_USER_REPOS';
 const SET_USER_REPOS = '@@github/SET_USER_REPOS';
+const GITHUB_FETCH_ERROR = '@@github/GITHUB_FETCH_ERROR';
 
 function doFetchUserDetails(username: string) {
     return (dispatch: Function) => {
@@ -50,9 +51,9 @@ function doSetRepos(repos: Array<Repo>) {
 const initialState = {
   userDetails: {},
   username: '',
-  followers: {},
-  following: {},
-  repos: {},
+  followers: [],
+  following: [],
+  repos: []
 };
 
 function applyResetUser(state) {
@@ -81,18 +82,18 @@ function applySetRepos(state, action) {
 
 function reducer(state: Object = initialState, action: Object) {
   switch (action.type) {
-    case FETCH_USER_DETAILS:
-      return applyResetUser(state);
-    case SET_USER_DETAILS:
-      return applySetUser(state, action);
-    case SET_USER_FOLLOWERS:
-      return applySetFollowers(state, action);
-    case SET_USER_FOLLOWING:
-      return applySetFollowing(state, action);
-    case SET_USER_REPOS:
-      return applySetRepos(state, action);
-    default:
-      return state;
+  case FETCH_USER_DETAILS:
+    return applyResetUser(state);
+  case SET_USER_DETAILS:
+    return applySetUser(state, action);
+  case SET_USER_FOLLOWERS:
+    return applySetFollowers(state, action);
+  case SET_USER_FOLLOWING:
+    return applySetFollowing(state, action);
+  case SET_USER_REPOS:
+    return applySetRepos(state, action);
+  default:
+    return state;
   }
 }
 
@@ -112,6 +113,7 @@ const actionTypes = {
   SET_USER_FOLLOWING,
   FETCH_USER_REPOS,
   SET_USER_REPOS,
+  GITHUB_FETCH_ERROR,
 };
 
 export {

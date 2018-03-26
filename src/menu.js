@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Col, FormGroup, FormControl, MenuItem, Nav, Navbar, NavDropdown,
   NavItem, Row} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
-import {NavLink} from 'react-router-dom';
+// import {NavLink} from 'react-router-dom';
 
 export class Menu extends Component {
   props: {

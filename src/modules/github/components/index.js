@@ -1,7 +1,13 @@
 // @flow
 
 import React, {Component, Fragment} from 'react';
-import {Col, Glyphicon, Label, Row} from 'react-bootstrap';
+import {Alert, Col, Glyphicon, Label, Row, Nav, NavItem} from 'react-bootstrap';
+import {Route, Switch} from 'react-router-dom';
+import {LinkContainer} from 'react-router-bootstrap';
+import {Home} from './Home';
+import {Followers} from './Followers';
+import {Following} from './Following';
+import {Repos} from './Repos';
 
 class GitHub extends Component {
   props: {
@@ -19,9 +25,20 @@ class GitHub extends Component {
   }
 
   render() {
-    const {userDetails, followers = [], following = []} = this.props;
+    const {userDetails, followers = [], following = [], repos = []} = this.props;
+    console.log('this.props- ', this.props);
+    const handleSelect = () => {
+        console.log('handle select');
+    }
     return (
       <Fragment>
+        {userDetails.message &&
+          <Row>
+              <Alert bsStyle="danger">
+                  <a href={userDetails.documentation_url} target="_blank">{userDetails.message}</a>
+              </Alert>
+          </Row>
+        }
         <Row className="profile">
           <Col md={3}>
             <div className="sidebar">
@@ -43,34 +60,39 @@ class GitHub extends Component {
                     <Label bsStyle="info">Following: {userDetails.following}</Label>
                 </div>
                 <div className="usermenu">
-                    <ul className="nav">
-                        <li className="active">
-                            <a href="/">
+                    <Nav bsStyle="pills" className="nav" stacked activeKey={1} onSelect={handleSelect}>
+                        <LinkContainer activeClassName="nav-menu-active" exact to={`/git`}>
+                            <NavItem eventKey={1}>
                                 <Glyphicon glyph="home" /> Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
+                            </NavItem>
+                        </LinkContainer>
+                        <LinkContainer activeClassName="nav-menu-active" exact to={`/git/followers`}>
+                            <NavItem eventKey={2}>
                                 <Glyphicon glyph="user" /> Followers
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
+                            </NavItem>
+                        </LinkContainer>
+                        <LinkContainer activeClassName="nav-menu-active" exact to={`/git/following`}>
+                            <NavItem eventKey={3}>
                                 <Glyphicon glyph="ok" /> Following
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
+                            </NavItem>
+                        </LinkContainer>
+                        <LinkContainer activeClassName="nav-menu-active" exact to={`/git/repos`}>
+                            <NavItem eventKey={4}>
                                 <Glyphicon glyph="flag" /> Repos
-                            </a>
-                        </li>
-                    </ul>
+                            </NavItem>
+                        </LinkContainer>
+                    </Nav>
                 </div>
             </div>
           </Col>
           <Col md={9}>
             <div className="content">
-                Some user related content goes here...
+              <Switch>
+                <Route exact path="/git" component={Home} />
+                <Route path="/git/followers" render={()=><Followers followers={followers} />} />
+                <Route path="/git/following" render={()=><Following following={following} />} />
+                <Route path="/git/repos" render={()=><Repos repos={repos} />} />
+              </Switch>
             </div>
           </Col>
         </Row>

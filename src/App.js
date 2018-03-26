@@ -1,9 +1,8 @@
 // @flow
 
-import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Grid, Row} from 'react-bootstrap';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {actionCreators as gitActionCreators} from './modules/github/actions';
@@ -37,10 +36,11 @@ class App extends Component {
           <Menu onSearch={doFetchUserDetails} />
           <Row className="root">
               <Switch>
-                <Route exact path="/" component={GitHub} />
-                <Route exact path="/grid" component={GridTable} />
-                <Route exact path="/git" component={GitHub} />
-                <Route component={NoMatch} />
+                <Redirect from="/" exact to="/git" />
+                <Route path="/git" component={GitHub} />
+                <Route path="/grid" component={GridTable} />
+                <Route path="/git" component={GitHub} />
+                <Route path="*" component={NoMatch} />
               </Switch>
           </Row>
         </Grid>
