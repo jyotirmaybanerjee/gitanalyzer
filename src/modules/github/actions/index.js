@@ -77,6 +77,15 @@ function applySetFollowing(state, action) {
 
 function applySetRepos(state, action) {
   const {repos} = action;
+    repos.sort((a, b) => {
+        if (a.fork) {
+            return 1;
+        }
+        if (b.fork) {
+            return -1;
+        }
+        return 0;
+    });
   return {...state, repos};
 }
 

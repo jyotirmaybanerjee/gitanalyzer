@@ -21,12 +21,11 @@ class GitHub extends Component {
 
   componentWillMount() {
     const {doFetchUserDetails} = this.props;
-    doFetchUserDetails('jyotirmaybanerjee');
+    doFetchUserDetails('gaearon');
   }
 
   render() {
-    const {userDetails, followers = [], following = [], repos = []} = this.props;
-    console.log('this.props- ', this.props);
+    const {userDetails, followers = [], following = [], repos = [], doFetchUserDetails} = this.props;
     const handleSelect = () => {
         console.log('handle select');
     }
@@ -89,8 +88,12 @@ class GitHub extends Component {
             <div className="content">
               <Switch>
                 <Route exact path="/git" component={Home} />
-                <Route path="/git/followers" render={()=><Followers followers={followers} />} />
-                <Route path="/git/following" render={()=><Following following={following} />} />
+                <Route path="/git/followers" render={()=><Followers followers={followers}
+                    doFetchUserDetails={doFetchUserDetails} />}
+                />
+                <Route path="/git/following" render={()=><Following following={following}
+                    doFetchUserDetails={doFetchUserDetails} />}
+                />
                 <Route path="/git/repos" render={()=><Repos repos={repos} />} />
               </Switch>
             </div>

@@ -5,11 +5,11 @@ import {makeData, Tips} from './Utils';
 
 class FixedHeaderScroll extends Component {
     state = {
-      data: makeData()
+      data: makeData(),
     }
 
     render() {
-      const { data } = this.state;
+      const {data} = this.state;
       return (
         <div>
             <ReactTable
@@ -20,28 +20,28 @@ class FixedHeaderScroll extends Component {
                     columns: [
                         {
                         Header: 'First Name',
-                        accessor: 'firstName'
+                        accessor: 'firstName',
                         },
                         {
                         Header: 'Last Name',
                         id: 'lastName',
-                        accessor: d => d.lastName
-                        }
-                    ]
+                        accessor: d => d.lastName,
+                        },
+                    ],
                     },
                     {
                     Header: 'Info',
                     columns: [
                         {
                         Header: 'Age',
-                        accessor: 'age'
-                        }
-                    ]
-                    }
+                        accessor: 'age',
+                        },
+                    ],
+                    },
                 ]}
                 defaultPageSize={20}
                 style={{
-                    height: '600px' // This will force the table body to overflow and scroll, since there is not enough room
+                    height: '600px', // This will force the table body to overflow and scroll, since there is not enough room
                 }}
                 className="-striped -highlight"
             />

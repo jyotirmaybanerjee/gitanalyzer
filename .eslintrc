@@ -7,18 +7,25 @@
         "class-methods-use-this": 0,
         "comma-dangle": 1,
         "global-require": 1,
-        "import/prefer-default-export": 1,
-        "no-nested-ternary": 1,
-        "no-plusplus": 1,
+        "import/prefer-default-export": 0,
+        "no-console": 1,
+        "no-plusplus": 0,
         "no-restricted-globals": 1,
         "no-undef": 1,
-        "no-unused": 1,
+        "no-nested-ternary": 0,
+        "no-unused": 0,
         "no-unused-vars": 1,
         "no-underscore-dangle": 1,
         "max-len": [1, 70, 2, {"ignoreComments": true}],
         "object-curly-newline": 0,
         "object-curly-spacing": [1, "never"],
-        "prop-types": [0]
+        "prop-types": [0],
+        "react/display-name": 0,
+        "react/prop-types": 1
     },
-    "extends": ["airbnb-base"]
+    "extends": [
+        "airbnb-base",
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ]
 }

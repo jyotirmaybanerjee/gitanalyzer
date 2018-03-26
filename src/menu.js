@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import {Button, Col, FormGroup, FormControl, MenuItem, Nav, Navbar, NavDropdown,
-  NavItem, Row} from 'react-bootstrap';
+import {Button, FormGroup, FormControl, Nav, Navbar, NavItem, Row} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
-// import {NavLink} from 'react-router-dom';
 
 export class Menu extends Component {
   props: {
@@ -15,12 +13,10 @@ export class Menu extends Component {
 
   onSearch = () => {
     const {onSearch} = this.props;
-    console.log('searchString- ', this.state.searchString);
     onSearch(this.state.searchString);
   }
 
   render() {
-    const {onSearch} = this.props;
     return (
       <Row>
         <Navbar inverse collapseOnSelect fixedTop>
@@ -45,7 +41,7 @@ export class Menu extends Component {
             </Nav>
             <Navbar.Form pullRight>
               <FormGroup>
-                <FormControl type="text" placeholder="Search"
+                <FormControl type="text" placeholder="github username"
                   onChange={(e) => this.setState({searchString: e.target.value})}
                 />
               </FormGroup>{' '}

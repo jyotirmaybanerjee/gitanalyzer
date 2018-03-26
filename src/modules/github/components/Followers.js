@@ -1,10 +1,10 @@
 import React from 'react';
 
-export const Followers = ({followers}) => {
+export const Followers = ({followers, doFetchUserDetails}) => {
     return (
         <div className="follow">
             <h3>
-                List of Followers
+                Followers ({followers.length})
             </h3>
             <div className="main-box no-header clearfix">
                 <div className="main-box-body clearfix">
@@ -22,11 +22,15 @@ export const Followers = ({followers}) => {
                                     <tr key={follower.login}>
                                         <td>
                                             <img src={follower.avatar_url} alt="" />
-                                            <a href="#" className="user-link">{follower.login}</a>
+                                            <span className="user-link cursor-pointer"
+                                                onClick={() => doFetchUserDetails(follower.login)}
+                                            >
+                                                {follower.login}
+                                            </span>
                                             <span className="user-subhead">{follower.type}</span>
                                         </td>
                                         <td>
-                                            <a href="#">{follower.url}</a>
+                                            <a href={follower.html_url} target="_blank">{follower.html_url}</a>
                                         </td>
                                     </tr>
                                 )

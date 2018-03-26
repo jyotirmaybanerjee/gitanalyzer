@@ -6,11 +6,11 @@ import {makeData, Tips} from './Utils';
 
 class FilteredGrid extends React.Component {
   state = {
-    data: makeData()
+    data: makeData(),
   };
 
   render() {
-    const { data } = this.state;
+    const {data} = this.state;
     return (
       <div>
         <ReactTable
@@ -27,30 +27,30 @@ class FilteredGrid extends React.Component {
                   accessor: 'firstName',
                   filterMethod: (filter, row) =>
                     row[filter.id].startsWith(filter.value) &&
-                    row[filter.id].endsWith(filter.value)
+                    row[filter.id].endsWith(filter.value),
                 },
                 {
                   Header: 'Last Name',
                   id: 'lastName',
                   accessor: d => d.lastName,
                   filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ['lastName'] }),
-                  filterAll: true
-                }
-              ]
+                    matchSorter(rows, filter.value, {keys: ['lastName']}),
+                  filterAll: true,
+                },
+              ],
             },
             {
               Header: 'Info',
               columns: [
                 {
                   Header: 'Age',
-                  accessor: 'age'
+                  accessor: 'age',
                 },
                 {
                   Header: 'Over 21',
                   accessor: 'age',
                   id: 'over',
-                  Cell: ({ value }) => (value >= 21 ? 'Yes' : 'No'),
+                  Cell: ({value}) => (value >= 21 ? 'Yes' : 'No'),
                   filterMethod: (filter, row) => {
                     if (filter.value === 'all') {
                       return true;
@@ -60,19 +60,19 @@ class FilteredGrid extends React.Component {
                     }
                     return row[filter.id] < 21;
                   },
-                  Filter: ({ filter, onChange }) =>
+                  Filter: ({filter, onChange}) =>
                     <select
                       onChange={event => onChange(event.target.value)}
-                      style={{ width: '100%' }}
+                      style={{width: '100%'}}
                       value={filter ? filter.value : 'all'}
                     >
                       <option value="all">Show All</option>
                       <option value="true">Can Drink</option>
-                      <option value="false">Can't Drink</option>
-                    </select>
-                }
-              ]
-            }
+                      <option value="false">Can not Drink</option>
+                    </select>,
+                },
+              ],
+            },
           ]}
           defaultPageSize={10}
           className="-striped -highlight"

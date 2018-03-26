@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope, no-undef */
 import {shallow} from 'enzyme';
 import GitHub from '../components';
 
@@ -5,15 +6,15 @@ describe('GitHub', () => {
 
   const props = {
       userDetails: {},
-      username: 'jyotirmaybanerjee',
+      username: 'gaearon',
       followers: [],
       following: [],
       repos: [],
-      doFetchUserDetails: () => {}
+      doFetchUserDetails: () => {},
   };
 
   it('shows two elements', () => {
-    const element = shallow(<GitHub { ...props } />);
+    const element = shallow(<GitHub {...props} />);
 
     expect(element.find('.profile-usertitle')).to.have.length(1);
     expect(element.find('.profile-usertitle-name')).to.have.length(1);
