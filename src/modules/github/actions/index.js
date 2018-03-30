@@ -10,6 +10,13 @@ const FETCH_USER_REPOS = '@@github/FETCH_USER_REPOS';
 const SET_USER_REPOS = '@@github/SET_USER_REPOS';
 const GITHUB_FETCH_ERROR = '@@github/GITHUB_FETCH_ERROR';
 
+function doSetUserDetails(userDetails: User) {
+  return {
+    type: SET_USER_DETAILS,
+    userDetails,
+  };
+}
+
 function doFetchUserDetails(username: string) {
     return (dispatch: Function) => {
         fetch(`https://api.github.com/users/${username}`)
@@ -18,13 +25,6 @@ function doFetchUserDetails(username: string) {
             dispatch(doSetUserDetails(data));
         });
     };
-}
-
-function doSetUserDetails(userDetails: User) {
-  return {
-    type: SET_USER_DETAILS,
-    userDetails,
-  };
 }
 
 function doSetFollowers(followers: Array<Follow>) {

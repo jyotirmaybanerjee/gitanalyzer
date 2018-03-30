@@ -9,6 +9,7 @@ import {actionCreators as gitActionCreators} from './modules/github/actions';
 
 import GitHub from './modules/github';
 import GridTable from './modules/grid';
+import Charts from './modules/charts';
 import {Menu} from './menu';
 
 @connect(state => ({
@@ -40,6 +41,7 @@ class App extends Component {
                 <Route path="/git" component={GitHub} />
                 <Route path="/grid" component={GridTable} />
                 <Route path="/git" component={GitHub} />
+                <Route path="/charts" component={Charts} />
                 <Route path="*" component={NoMatch} />
               </Switch>
           </Row>

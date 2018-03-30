@@ -38,6 +38,11 @@ export class Menu extends Component {
                   <span>Git</span>
                 </NavItem>
               </LinkContainer>
+              <LinkContainer activeClassName="nav-menu-active" exact to="/charts">
+                <NavItem eventKey={3}>
+                  <span>Charts</span>
+                </NavItem>
+              </LinkContainer>
             </Nav>
             <Navbar.Form pullRight>
               <FormGroup>

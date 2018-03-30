@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import {applyMiddleware, compose, createStore} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';

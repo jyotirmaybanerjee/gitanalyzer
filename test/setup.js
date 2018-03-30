@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import jsdom from 'jsdom';
 import * as enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-enzyme.configure({ adapter: new Adapter() });
+enzyme.configure({adapter: new Adapter()});
 
 const {JSDOM} = jsdom;
 
